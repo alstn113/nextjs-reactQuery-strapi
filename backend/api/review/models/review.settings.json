@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "name": "review",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
+    },
+    "rating": {
+      "required": true,
+      "type": "integer",
+      "default": 5,
+      "max": 10,
+      "min": 1
+    },
+    "categories": {
+      "collection": "category",
+      "via": "reviews",
+      "dominant": true
+    }
+  }
+}
