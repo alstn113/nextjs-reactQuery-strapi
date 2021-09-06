@@ -17,11 +17,16 @@ function SiteHeader() {
           <h1>Minsoo Reviews</h1>
         </a>
       </Link>
+      <Link href="/infinite">
+        <a>
+          <h1>Infinite Reviews</h1>
+        </a>
+      </Link>
       <nav className="categories">
         <span>Filter reviews by categories : </span>
         {data &&
           data.map((category) => (
-            <Link key={category.id} href={`/category/${category.id}`}>
+            <Link key={category.id} href="/category/[id]" as={`/category/${category.id}`}>
               <a> {category.name}</a>
             </Link>
           ))}

@@ -26,7 +26,7 @@ function Category() {
               <div className="rating">{review.rating}</div>
               <h2>{review.title}</h2>
               <p>{review.body.substring(0, 100)}</p>
-              <Link href={`/details/${review.id}`}>
+              <Link href="/details/[id]" as={`/details/${review.id}`}>
                 <a> Read More</a>
               </Link>
             </div>
