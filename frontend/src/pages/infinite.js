@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from "react-query";
 import Link from "next/link";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import { useRef } from "react";
 
 import * as api from "../lib/api";
 
@@ -11,6 +13,13 @@ const Home = () => {
       getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
     }
   );
+  const loadMoreButtonRef = useRef();
+
+  useIntersectionObserver({
+    target: loadMoreButtonRef,
+    onIntersect: fetchNextPage,
+    enabled: hasNextPage,
+  });
 
   if (isLoading) return <div>loading...</div>;
   if (isError) return <p>Error : {error.message}</p>;
@@ -36,8 +45,8 @@ const Home = () => {
           </div>
         ))}
         <div className="load-more">
-          <button onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-            {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+          <button ref={loadMoreButtonRef} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+            {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load Newer" : "Nothing more to load"}
           </button>
         </div>
       </div>
